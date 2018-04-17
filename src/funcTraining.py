@@ -1,29 +1,54 @@
-# -*- coding: utf-8 -*-
+
+def tester(start):
+    state = start
+
+    def nested(label):
+        nonlocal state
+        print(label, state)
+        state += 1
+
+    return nested
+
+
+f = tester(0)
+f("php")
+f("php")
+tester(4)("c++")
+f("php")
+
 """
--------------------------------------------------
-   File Name：     funcTraining
-   Description :
-   Author :       cat
-   date：          2018/4/16
--------------------------------------------------
-   Change Activity:
-                   2018/4/16:
--------------------------------------------------
+php 0
+php 1
+c++ 4
+php 2
 """
 
-
-def intersect(s1, s2):
-    res = []
-    for x in s1:
-        if x in s2:
-            res.append(x)
-    return res
+# SyntaxError: no binding for nonlocal 'state' found
 
 
-if "__main__" == __name__:
-    s1 = "scam"
-    s2 = "pcsm"
+"""
+def tester(start):
+    global state
+    state = start
 
-    print(intersect(s1, s2))          // ['s', 'c', 'm']
-    print([x for x in s1 if x in s2]) // ['s', 'c', 'm']
-    pass
+    def nested(label):
+        global state
+        print(label, state)
+        state += 1
+
+    return nested
+
+
+f = tester(0)
+f("php")
+f("php")
+tester(4)("c++")
+f("php")
+"""
+# 对应的输出：
+"""
+php 0
+php 1
+c++ 4
+php 5
+"""
