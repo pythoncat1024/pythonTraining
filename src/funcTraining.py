@@ -1,54 +1,36 @@
-
-def tester(start):
-    state = start
-
-    def nested(label):
-        nonlocal state
-        print(label, state)
-        state += 1
-
-    return nested
+# -*- coding: utf-8 -*-
 
 
-f = tester(0)
-f("php")
-f("php")
-tester(4)("c++")
-f("php")
-
-"""
-php 0
-php 1
-c++ 4
-php 2
-"""
-
-# SyntaxError: no binding for nonlocal 'state' found
+def min1(*args):
+    first, *others = args
+    # print(args)
+    # print("first==" + str(first))
+    # print("others==" + str(others))
+    for item in others:
+        if first > item:
+            first = item
+    return first
 
 
-"""
-def tester(start):
-    global state
-    state = start
-
-    def nested(label):
-        global state
-        print(label, state)
-        state += 1
-
-    return nested
+m = min1(*[3, 2, 14, 5])
+print("min ", m)
 
 
-f = tester(0)
-f("php")
-f("php")
-tester(4)("c++")
-f("php")
-"""
-# 对应的输出：
-"""
-php 0
-php 1
-c++ 4
-php 5
-"""
+def minmax(*args):
+    func, first, *others = args
+
+    for item in others:
+        if func(first, item):
+            first = item
+    return first
+
+
+def lt(x, y):
+    return x > y
+
+
+def gt(x, y):
+    return x < y
+
+
+print(minmax(*[gt, 4, 2, 5, 9]))
