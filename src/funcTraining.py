@@ -1,36 +1,25 @@
 # -*- coding: utf-8 -*-
+"""
+函数即是一个普通的对象，可以如同对象一样使用
+"""
 
 
-def min1(*args):
-    first, *others = args
-    # print(args)
-    # print("first==" + str(first))
-    # print("others==" + str(others))
-    for item in others:
-        if first > item:
-            first = item
-    return first
+def echo(text):
+    print(text)
 
 
-m = min1(*[3, 2, 14, 5])
-print("min ", m)
+def marker(label):
+    def echo(message):
+        print(label + " : " + message)
+
+    return echo
 
 
-def minmax(*args):
-    func, first, *others = args
+if __name__ == "__main__":
+    schedule = [(echo, "Hello"), (echo, "World")]
 
-    for item in others:
-        if func(first, item):
-            first = item
-    return first
+    for func, arg in schedule:
+        func(arg)
+    pass
 
-
-def lt(x, y):
-    return x > y
-
-
-def gt(x, y):
-    return x < y
-
-
-print(minmax(*[gt, 4, 2, 5, 9]))
+    marker("learning")('python')
